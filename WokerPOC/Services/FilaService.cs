@@ -1,4 +1,4 @@
-﻿using WokerPOC;
+﻿using WokerPOC.Entities;
 using WokerPOC.Repositories;
 
 public class FilaService

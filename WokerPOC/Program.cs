@@ -1,4 +1,3 @@
-using WokerPOC;
 using WokerPOC.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);

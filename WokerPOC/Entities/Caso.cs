@@ -1,4 +1,4 @@
-﻿namespace WokerPOC
+﻿namespace WokerPOC.Entities
 {
     public class Caso
     {

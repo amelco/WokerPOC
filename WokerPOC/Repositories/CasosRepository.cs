@@ -1,4 +1,6 @@
-﻿namespace WokerPOC.Repositories
+﻿using WokerPOC.Entities;
+
+namespace WokerPOC.Repositories
 {
     public class CasosRepository
     {
@@ -19,12 +21,12 @@
 
         public void Adicionar()
         {
-            var caso = new Caso 
-            { 
+            var caso = new Caso
+            {
                 Id = Casos.Count + 1,
                 Nome = $"Caso número {Casos.Count + 1}",
                 Status = Status.Aberto,
-                Previa = DateTime.Now.AddSeconds((new Random()).Next(2,60)),
+                Previa = DateTime.Now.AddSeconds((new Random()).Next(2, 60)),
             };
             Casos.Add(caso);
         }

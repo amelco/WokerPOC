@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WokerPOC.Entities;
 using WokerPOC.Repositories;
 
 namespace WokerPOC.Controllers

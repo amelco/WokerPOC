@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-public class BackgroundWorkerService : BackgroundService
+﻿public class BackgroundWorkerService : BackgroundService
 {
     private readonly FilaService _fila;
     private DateTime _startTime;
@@ -21,7 +19,7 @@ public class BackgroundWorkerService : BackgroundService
             await Task.Delay(1000);
             _fila.Atualiza();
             Console.Write($"[Tempo: {(int)(DateTime.Now.Subtract(_startTime)).TotalSeconds} s] ");
-            Console.WriteLine($"Itens no temporizador: { _fila.TotalDeTemporizadores() }");
+            Console.WriteLine($"Itens no temporizador: {_fila.TotalDeTemporizadores()}");
         }
     }
 }
