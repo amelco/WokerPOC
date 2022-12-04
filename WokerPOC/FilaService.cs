@@ -5,7 +5,7 @@ using WokerPOC.Repositories;
 public class FilaService
 {
     private readonly CasosRepository _repository;
-    private List<Timer> timers;
+    private Dictionary<int, Timer> timers;
 
     public FilaService(CasosRepository repository)
     {
@@ -13,7 +13,7 @@ public class FilaService
         timers = new();
     }
 
-    public void iniciaFila()
+    public void Inicia()
     {
         var casos = _repository.Listar();
         foreach (var caso in casos)
@@ -22,6 +22,7 @@ public class FilaService
             {
                 var tempo = Convert.ToInt32(caso.Previa.Subtract(DateTime.Now).Seconds);
                 timers.Add(
+                    caso.Id,
                     new Timer(new TimerCallback(EncerraCaso), caso, tempo*1000, Timeout.Infinite)
                 );
                 Console.WriteLine($"Caso {caso.Id} aberto.");
@@ -37,6 +38,6 @@ public class FilaService
         var c = ((Caso)caso);
         c.Status = Status.Fechado;
         Console.Write($" Caso {c.Id} encerrado.\n");
-        // TODO: remover timer da lista
+        timers.Remove(c.Id);
     }
 }

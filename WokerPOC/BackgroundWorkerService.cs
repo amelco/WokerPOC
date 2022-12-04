@@ -15,7 +15,7 @@ public class BackgroundWorkerService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         // Carrega todos os casos que estão abertos
-        _fila.iniciaFila();
+        _fila.Inicia();
         while (true)
         {
             await Task.Delay(1000);
