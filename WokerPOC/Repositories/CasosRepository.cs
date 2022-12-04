@@ -17,10 +17,16 @@
             return Casos;
         }
 
-        public void Adicionar(Caso caso)
+        public void Adicionar()
         {
+            var caso = new Caso 
+            { 
+                Id = Casos.Count + 1,
+                Nome = $"Caso número {Casos.Count + 1}",
+                Status = Status.Aberto,
+                Previa = DateTime.Now.AddSeconds((new Random()).Next(2,60)),
+            };
             Casos.Add(caso);
-            // Disparar contador regressivo
         }
     }
 }

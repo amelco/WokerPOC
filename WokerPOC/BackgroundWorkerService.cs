@@ -15,11 +15,13 @@ public class BackgroundWorkerService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         // Carrega todos os casos que estão abertos
-        _fila.Inicia();
         while (true)
         {
+            // Apenas teste. Necessita event sourcing.
             await Task.Delay(1000);
-            Console.Write($"\n[Tempo: {(int)(DateTime.Now.Subtract(_startTime)).TotalSeconds} s] "); 
+            _fila.Atualiza();
+            Console.Write($"[Tempo: {(int)(DateTime.Now.Subtract(_startTime)).TotalSeconds} s] ");
+            Console.WriteLine($"Itens no temporizador: { _fila.TotalDeTemporizadores() }");
         }
     }
 }
