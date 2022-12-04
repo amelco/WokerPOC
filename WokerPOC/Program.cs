@@ -1,8 +1,10 @@
 using WokerPOC;
+using WokerPOC.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<FilaService>();
+builder.Services.AddSingleton<CasosRepository>();
 builder.Services.AddHostedService<BackgroundWorkerService>();
 
 builder.Services.AddControllers();
