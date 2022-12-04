@@ -1,25 +1,42 @@
-﻿public class FilaService
-{
-    public List<string> Fila { get; set; } = new();
-    public List<DateTime> Vencimento { get; set; } = new();
+﻿using Microsoft.AspNetCore.Mvc;
+using WokerPOC;
+using WokerPOC.Repositories;
 
-    public void AdicionaItem()
+public class FilaService
+{
+    private readonly CasosRepository _repository;
+    private List<Timer> timers;
+
+    public FilaService(CasosRepository repository)
     {
-        Random random = new Random();
-        Fila.Add($"Item {Fila.Count + 1}");
-        Vencimento.Add(DateTime.Now.AddSeconds(random.Next(2,100)));
+        _repository = repository;
+        timers = new();
     }
 
-    public void ChecaItensVencidos()
+    public void iniciaFila()
     {
-        for (var i=0; i < Vencimento.Count; i++)
+        var casos = _repository.Listar();
+        foreach (var caso in casos)
         {
-            if (DateTime.Now > Vencimento[i])
+            if (caso.Status != Status.Fechado)
             {
-                Console.WriteLine($"\nItem {i} venceu.\n");
-                Fila.RemoveAt(i);
-                Vencimento.RemoveAt(i);
+                var tempo = Convert.ToInt32(caso.Previa.Subtract(DateTime.Now).Seconds);
+                timers.Add(
+                    new Timer(new TimerCallback(EncerraCaso), caso, tempo*1000, Timeout.Infinite)
+                );
+                Console.WriteLine($"Caso {caso.Id} aberto.");
             }
         }
+    }
+
+    private void EncerraCaso(object? caso)
+    {
+        if (caso is null)
+            return;
+
+        var c = ((Caso)caso);
+        c.Status = Status.Fechado;
+        Console.Write($" Caso {c.Id} encerrado.\n");
+        // TODO: remover timer da lista
     }
 }

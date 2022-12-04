@@ -22,7 +22,7 @@ namespace WokerPOC.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            _fila.AdicionaItem();
+            //_fila.AdicionaItem();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
