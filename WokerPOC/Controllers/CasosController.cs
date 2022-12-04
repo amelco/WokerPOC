@@ -21,9 +21,9 @@ namespace WokerPOC.Controllers
         }
 
         [HttpPost]
-        public void Adicionar(Caso caso)
+        public void Adicionar()
         {
-            _repository.Adicionar(caso);
+            _repository.Adicionar();
         }
     }
 }
